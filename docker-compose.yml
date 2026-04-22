@@ -1,0 +1,23 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: diabetes-readmission:latest
+    container_name: diabetes_app
+    ports:
+      - "5000:5000"          # host:container — change host port if 5000 is taken
+    environment:
+      - FLASK_ENV=production
+    volumes:
+      # Optional: mount a local models/ folder so you can swap the model
+      # without rebuilding the image. Comment out if you prefer models baked in.
+      - ./models:/app/models:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request; urllib.request.urlopen('http://localhost:5000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
