@@ -220,5 +220,5 @@ print(f"Probability: {probability:.2%}")
 
 ---
 
-**Organization:** Entri Elevate  
+**Creation :** muhsina v s
 **Dataset:** UCI Diabetes 130-US Hospitals (1999–2008)
